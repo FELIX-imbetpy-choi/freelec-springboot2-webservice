@@ -1,0 +1,32 @@
+// 플러그인 의존성 관리 설정
+buildscript {
+    ext {
+        springBootVersion = '2.1.7.RELEASE' // 2.1.7, 2.1.8, 2.1.9 다 괜찮습니다.
+    }
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+// 선언한 플러그인의 의존성 적용 결정 코드
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+// 각종 의존성 라이브러리들을 어떤 원격 저장소에서 받을지 정한다.
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+// 개발에 필요한 의존성들을 선언하는 곳
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-web')
+    //여기서 특정버전을 명시하지 않아야 위에서 작성한 classpath 에서 한번에 버전관리가 가능하다.
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}
