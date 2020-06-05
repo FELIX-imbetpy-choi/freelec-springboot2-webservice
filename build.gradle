@@ -1,7 +1,6 @@
-// 플러그인 의존성 관리 설정
 buildscript {
     ext {
-        springBootVersion = '2.1.7.RELEASE' // 2.1.7, 2.1.8, 2.1.9 다 괜찮습니다.
+        springBootVersion = '2.1.7.RELEASE'
     }
     repositories {
         mavenCentral()
@@ -10,40 +9,37 @@ buildscript {
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
     }
+
 }
 
-// 선언한 플러그인의 의존성 적용 결정 코드
+
+
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
-// 각종 의존성 라이브러리들을 어떤 원격 저장소에서 받을지 정한다.
+group 'com.jojoldu.book'
+version '1.0-SNAPSHOT'
+sourceCompatibility = 1.8
+
 repositories {
     mavenCentral()
     jcenter()
 }
 
-// 개발에 필요한 의존성들을 선언하는 곳
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
-
-    // lombok 은 자주사용하는 getter, setter, 기본생성자, toString 등을 어노테이션으로 자동생성
     compile('org.projectlombok:lombok')
-
-    // spring-boot-starter-data-jpa
-    // 스프링부트용 jpa 추상화 라이브러리, 부트버전에 맞춰 자동으로 jpa 관련 라이브러리 버전을 관리합니다.
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
-
-    // h2
-    // 인메모리 관계형 데이터베이스, 별도 설치 없이 의존성만으로 관리할 수 있습니다.
-    // 메모리에서 실행되기 때문에 애플리케이션을 재식작할 때 초기화 된다는 점을 이용해서 테스트 용도로 사용.
+    compile('org.springframework.boot:spring-boot-starter-mustache')
     compile('com.h2database:h2')
 
-    compile('org.springframework.boot:spring-boot-starter-mustache')
-    
-    
-    //여기서 특정버전을 명시하지 않아야 위에서 작성한 classpath 에서 한번에 버전관리가 가능하다.
-    testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile('org.springframework.boot:spring-boot-starter-oauth2-client')
+    compile('org.springframework.session:spring-session-jdbc')
 
+    compile("org.mariadb.jdbc:mariadb-java-client")
+
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile("org.springframework.security:spring-security-test")
 }
