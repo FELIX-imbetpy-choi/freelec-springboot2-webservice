@@ -1,4 +1,7 @@
 
+before_install:
+  - chomod +x gradlew
+
 language: java
 jdk:
   -openjdk8
@@ -17,7 +20,6 @@ cache:
 script: "./gradlew clean build"
 
 before_deploy:
-  - chomod +x gradlew
   - zip -r springboot-web-study
   - mkdir -p deploy
   - mv springboot-web-study.zip deploy/springboot-web-study.zip
