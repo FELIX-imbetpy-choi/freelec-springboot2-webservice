@@ -4,4 +4,3 @@
 application-oauth.properties
 build/generated/
 build/tmp/
-application-real-db.properties
