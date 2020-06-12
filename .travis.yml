@@ -17,9 +17,9 @@ cache:
 script: "./gradlew clean build"
 
 before_deploy:
-  - zip -r springboot-web-study
   - mkdir -p deploy
-  - mv springboot-web-study.zip deploy/springboot-web-study.zip
+  - zip -r freelec-springboot2-webservice
+  - mv freelec-springboot2-webservice.zip deploy/freelec-springboot2-webservice.zip
 
 deploy:
   - provider: s3
@@ -47,6 +47,7 @@ deploy:
 
 before_install:
   - chmod +x gradlew
+  - chmod +x zip
 
 # CI 실행 완료 시 메일로 알람
 notifications:
