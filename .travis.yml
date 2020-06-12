@@ -17,9 +17,9 @@ cache:
 script: "./gradlew clean build"
 
 before_deploy:
-  - zip -r springboot-web-study *
+  - zip -r freelec-springboot2-webservice *
   - mkdir -p deploy
-  - mv springboot-web-study.zip deploy/springboot-web-study.zip
+  - mv freelec-springboot2-webservice.zip deploy/freelec-springboot2-webservice.zip
 
 
 
@@ -38,6 +38,7 @@ deploy:
     access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
     secret_access_key: $AWS_SECRET_KEY # Travis repo settings에 설정된 값
     bucket: felix-freelec-springboot-build # S3 버킷
+    # https://github.com/jojoldu/freelec-springboot2-webservice/issues/80 키 관련 오류
     key: freelec-springboot2-webservice.zip # 빌드 파일을 압축해서 전달
     bundle_type: zip
     application: freelec-springboot2-webservice # 웹 콘솔에서 등록한 CodeDeploy 어플리케이션
