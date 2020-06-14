@@ -46,7 +46,6 @@ deploy:
     region: ap-northeast-2
     wait-until-deployed: true
 
-
 before_install:
   - chmod +x gradlew
 
